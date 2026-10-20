@@ -1,0 +1,277 @@
+<?xml version='1.0' encoding='utf-8'?>
+<includes>
+    <variable name="AZR528_Artwork">
+        <value condition="!String.IsEmpty(ListItem.Art(landscape))">$INFO[ListItem.Art(landscape)]</value>
+        <value condition="!String.IsEmpty(ListItem.Art(fanart))">$INFO[ListItem.Art(fanart)]</value>
+        <value>DefaultMovies.png</value>
+    </variable>
+    <variable name="AZR528_MovieTitle">
+        <value condition="!String.IsEmpty(ListItem.Title)">$INFO[ListItem.Title]</value>
+        <value>$INFO[ListItem.Label]</value>
+    </variable>
+    <variable name="AZR528_SpotlightTitle">
+        <value condition="!String.IsEmpty(Container(528).ListItem.Title)">$INFO[Container(528).ListItem.Title]</value>
+        <value>$INFO[Container(528).ListItem.Label]</value>
+    </variable>
+    <include name="View_528_LandscapeGrid">
+        <control type="group">
+            <include>Animation.Common</include>
+            <visible>Control.IsVisible(528)</visible>
+            <control type="panel" id="528">
+                <visible>Container.Content(movies)</visible>
+                <animation effect="fade" start="100" end="0" time="450" tween="sine" easing="inout" reversible="true" condition="System.IdleTime(10) + Control.HasFocus(528) + !String.IsEmpty(Container(528).ListItem.Art(fanart))">Conditional</animation>
+                <left>70</left>
+                <top>180</top>
+                <width>1780</width>
+                <height>735</height>
+                <onleft condition="!Skin.HasSetting(global.kioskmode)">9000</onleft>
+                <onright>528</onright>
+                <onup>528</onup>
+                <ondown>528</ondown>
+                <preloaditems>2</preloaditems>
+                <pagecontrol>6528</pagecontrol>
+                <viewtype label="Landscape Grid">icon</viewtype>
+                <include>ScrolltimeViewsList</include>
+                <itemlayout width="445" height="316">
+                    <control type="image">
+                        <left>10</left>
+                        <top>0</top>
+                        <width>425</width>
+                        <height>236</height>
+                        <aspectratio>scale</aspectratio>
+                        <texture background="true">$VAR[AZR528_Artwork]</texture>
+                    </control>
+					<!-- TITLE -->
+                    <control type="label">
+                        <left>10</left>
+                        <top>236</top>
+                        <width>360</width>
+                        <height>30</height>
+                        <font>Tiny</font>
+                        <textcolor>FFC5C5C5</textcolor>
+                        <align>left</align>
+                        <aligny>top</aligny>
+                        <scroll>false</scroll>
+                        <wrapmultiline>false</wrapmultiline>
+                        <label>$VAR[AZR528_MovieTitle]</label>
+                    </control>
+					<!-- YEAR -->
+                    <control type="label">
+                        <right>10</right>
+                        <top>236</top>
+                        <width>0</width>
+                        <height>30</height>
+                        <font>Mini</font>
+                        <textcolor>FFC5C5C5</textcolor>
+                        <align>right</align>
+                        <aligny>top</aligny>
+                        <scroll>false</scroll>
+                        <wrapmultiline>false</wrapmultiline>
+                        <label>$INFO[ListItem.Year]</label>
+                    </control>
+					<!-- GENRES -->
+                    <control type="label">
+                        <left>10</left>
+                        <top>266</top>
+                        <width>360</width>
+                        <height>30</height>
+                        <font>Tiny44</font>
+                        <textcolor>FFA2A2A2</textcolor>
+                        <align>left</align>
+                        <aligny>top</aligny>
+                        <scroll>false</scroll>
+                        <wrapmultiline>false</wrapmultiline>
+                        <label>$INFO[ListItem.Genre]</label>
+                    </control>
+					<!-- DURATION -->
+                    <control type="label">
+                        <right>10</right>
+                        <top>266</top>
+                        <width>0</width>
+                        <height>30</height>
+                        <font>Tiny44</font>
+                        <textcolor>FFA2A2A2</textcolor>
+                        <align>right</align>
+                        <aligny>top</aligny>
+                        <scroll>false</scroll>
+                        <wrapmultiline>false</wrapmultiline>
+                        <label>$INFO[ListItem.Duration(hh:mm)]</label>
+                    </control>
+                </itemlayout>
+                <focusedlayout width="445" height="316">
+                    <control type="group">
+                        <control type="image">
+                            <left>10</left>
+                            <top>0</top>
+                            <width>425</width>
+                            <height>236</height>
+                            <aspectratio>scale</aspectratio>
+                            <texture background="true">$VAR[AZR528_Artwork]</texture>
+                        </control>
+                        <control type="image">
+                            <visible>Control.HasFocus(528)</visible>
+                            <left>10</left>
+                            <top>0</top>
+                            <width>425</width>
+                            <height>236</height>
+                            <texture border="20" colordiffuse="$VAR[ColorSquares]">common/selectbox.png</texture>
+                        </control>
+                        <control type="image">
+                            <visible>Control.HasFocus(528)</visible>
+                            <left>10</left>
+                            <top>0</top>
+                            <width>425</width>
+                            <height>236</height>
+                            <texture border="20" colordiffuse="$VAR[ColorHighlightSelectbox2]">common/gradient-selectbox.png</texture>
+                        </control>
+						<!-- TITLE FOCUSED -->
+                        <control type="label">
+                            <left>10</left>
+                            <top>236</top>
+                            <width>360</width>
+                            <height>30</height>
+                            <font>Tiny</font>
+                            <textcolor>$VAR[ColorSquares]</textcolor>
+							<shadowcolor>$VAR[ColorHighlightSelectbox2]</shadowcolor>
+                            <align>left</align>
+                            <aligny>top</aligny>
+                            <scroll>false</scroll>
+                            <wrapmultiline>false</wrapmultiline>
+                            <label>$VAR[AZR528_MovieTitle]</label>
+                        </control>
+						<!-- YEAR FOCUSED -->
+                        <control type="label">
+                            <right>10</right>
+                            <top>236</top>
+                            <width>0</width>
+                            <height>30</height>
+                            <font>Mini</font>
+                            <textcolor>$VAR[ColorSquares]</textcolor>
+							<shadowcolor>$VAR[ColorHighlightSelectbox2]</shadowcolor>
+                            <align>right</align>
+                            <aligny>top</aligny>
+                            <scroll>false</scroll>
+                            <wrapmultiline>false</wrapmultiline>
+                            <label>$INFO[ListItem.Year]</label>
+                        </control>
+						<!-- GENRES FOCUSED -->
+                        <control type="label">
+                            <left>10</left>
+                            <top>266</top>
+                            <width>360</width>
+                            <height>30</height>
+                            <font>Tiny44</font>
+                            <textcolor>$VAR[ColorSquares]</textcolor>
+							<shadowcolor>$VAR[ColorHighlightSelectbox2]</shadowcolor>
+                            <align>left</align>
+                            <aligny>top</aligny>
+                            <scroll>false</scroll>
+                            <wrapmultiline>false</wrapmultiline>
+                            <label>$INFO[ListItem.Genre]</label>
+                        </control>
+						<!-- DURATION FOCUSED -->
+                        <control type="label">
+                            <right>10</right>
+                            <top>266</top>
+                            <width>0</width>
+                            <height>30</height>
+                            <font>Tiny44</font>
+                            <textcolor>$VAR[ColorSquares]</textcolor>
+							<shadowcolor>$VAR[ColorHighlightSelectbox2]</shadowcolor>
+                            <align>right</align>
+                            <aligny>top</aligny>
+                            <scroll>false</scroll>
+                            <wrapmultiline>false</wrapmultiline>
+                            <label>$INFO[ListItem.Duration(hh:mm)]</label>
+                        </control>
+                    </control>
+                </focusedlayout>
+            </control>
+            <!-- SCROLLBAR -->
+            <control type="scrollbar" id="6528">
+                <left>1860</left>
+                <top>180</top>
+                <width>8</width>
+                <height>735</height>
+                <orientation>vertical</orientation>
+                <showonepage>false</showonepage>
+                <texturesliderbackground colordiffuse="White12">common/white.png</texturesliderbackground>
+                <texturesliderbar colordiffuse="White30">common/white.png</texturesliderbar>
+                <texturesliderbarfocus colordiffuse="$VAR[ColorHighlight]">common/white.png</texturesliderbarfocus>
+                <textureslidernib />
+                <textureslidernibfocus />
+                <visible>Container.Content(movies) + Control.IsVisible(528)</visible>
+                <animation effect="fade" start="100" end="0" time="450" tween="sine" easing="inout" reversible="true" condition="System.IdleTime(10) + Control.HasFocus(528) + !String.IsEmpty(Container(528).ListItem.Art(fanart))">Conditional</animation>
+            </control>
+			<!-- FULLSCREEN FANART -->
+            <control type="image">
+                <left>0</left>
+                <top>0</top>
+                <width>1920</width>
+                <height>1080</height>
+                <aspectratio>scale</aspectratio>
+                <texture background="true">$INFO[Container(528).ListItem.Art(fanart)]</texture>
+                <visible>Container.Content(movies) + System.IdleTime(10) + Control.HasFocus(528) + !String.IsEmpty(Container(528).ListItem.Art(fanart))</visible>
+                <animation effect="fade" time="450" tween="sine" easing="inout">VisibleChange</animation>
+            </control>
+			<!-- GRADIENT -->
+            <control type="image">
+                <left>0</left>
+                <top>0</top>
+                <width>1920</width>
+                <height>1080</height>
+                <aspectratio>stretch</aspectratio>
+                <texture>landscapegrid_gradient.png</texture>
+                <visible>Container.Content(movies) + System.IdleTime(10) + Control.HasFocus(528) + !String.IsEmpty(Container(528).ListItem.Art(fanart))</visible>
+                <animation effect="fade" time="450" tween="sine" easing="inout">VisibleChange</animation>
+            </control>
+            <control type="group">
+                <visible>Container.Content(movies) + System.IdleTime(10) + Control.HasFocus(528) + !String.IsEmpty(Container(528).ListItem.Art(fanart))</visible>
+                <animation effect="fade" time="450" tween="sine" easing="inout">VisibleChange</animation>
+				<!-- TITLE -->
+				<control type="label">
+                    <description>Spotlight title — edit font, top, left</description>
+                    <left>80</left>
+                    <top>630</top>
+                    <width>auto</width>
+                    <height>70</height>
+                    <font>LargeNew</font>
+                    <textcolor>FFDDDDDD</textcolor>
+					<shadowcolor>88000000</shadowcolor>
+                    <align>left</align>
+                    <aligny>top</aligny>
+                    <scroll>false</scroll>
+                    <wrapmultiline>false</wrapmultiline>
+                    <label>[B]$VAR[AZR528_SpotlightTitle][/B]</label>
+                </control>
+				<!-- RUNTIME AND RELEASE YEAR -->
+                <control type="label">
+                    <left>80</left>
+                    <top>700</top>
+                    <width>1000</width>
+                    <height>45</height>
+                    <font>Small</font>
+                    <textcolor>FFDDDDDD</textcolor>
+					<shadowcolor>88000000</shadowcolor>
+                    <align>left</align>
+                    <aligny>top</aligny>
+                    <scroll>false</scroll>
+                    <wrapmultiline>false</wrapmultiline>
+                    <label>$INFO[Container(528).ListItem.Year] • $INFO[Container(528).ListItem.Duration(hh:mm)]</label>
+                </control>
+				<!-- PLOT SUMMARY -->
+                <control type="textbox">
+                    <left>80</left>
+                    <top>760</top>
+                    <width>1440</width>
+                    <height>300</height>
+                    <font>Small</font>
+                    <textcolor>FFDDDDDD</textcolor>
+					<shadowcolor>88000000</shadowcolor>
+                    <align>left</align>
+                    <label>$INFO[Container(528).ListItem.Plot]</label>
+                </control>
+            </control>
+        </control>
+    </include>
+</includes>
