@@ -51,6 +51,7 @@
         <include>View_513_Shifted</include>
         <include>View_514_Albums</include>
         <include>View_527_List_V2</include>
+        <include>View_528_LandscapeGrid</include>
         <include>JumpBarHorizontal2</include>
         <include>Furniture_Header</include>
         <include>Furniture_NowPlaying</include>
